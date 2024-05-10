@@ -1,17 +1,20 @@
 #include "stdio.h"
 #include "stdlib.h"
+struct Bot
+{
+    /* data */
+};
 
 void getMenu()
 {
     int opcion = 0;
-    while (opcion != 5)
+    while (opcion != 4)
     {
         printf("\n\tMENU.\n");
         printf("1. Jugar\n");
         printf("2. Editor de Laberintos.\n");
-        printf("3. Repeticiones.\n");
-        printf("4. Reportes.\n");
-        printf("5. Salir.\n");
+        printf("3. Reportes.\n");
+        printf("4. Salir.\n");
 
         printf("Selecciona una opcion > ");
         scanf("%d", &opcion);
@@ -22,10 +25,6 @@ void getMenu()
         else if (opcion == 2)
         {
             printf("\nOPCION: EDITOR DE LABERINTOS\n");
-        }
-        else if (opcion == 3)
-        {
-            printf("\nOPCION: REPETICIONES\n");
         }
         else if (opcion == 4)
         {
