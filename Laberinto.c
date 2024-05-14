@@ -1,11 +1,15 @@
 #include "stdio.h"
 #include "stdlib.h"
+#include "time.h"
 
 #define FILAS 30
 #define COLUMAS 30
 #define limiteInf 1
 #define liminteSup 28
+#define errorMov 0
+#define aceptarMov 1
 
+// var Globales
 char matrix[FILAS][COLUMAS] =
     {{'#', '#', '#', '#', '#', '#', '#', '#', 'S', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
      {'#', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'S'},
@@ -38,6 +42,7 @@ char matrix[FILAS][COLUMAS] =
      {'#', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', 'O', 'O', '#', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', '#'},
      {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', 'S', '#', '#', '#', '#', '#', '#', '#', '#', '#'}};
 
+// declaracion de la funcion
 void limpiar_pantalla();
 
 void getMenu()
@@ -76,6 +81,29 @@ void getMenu()
     }
 }
 
+int rd(int limSup, int limInf)
+{
+    // srand(time(NULL));
+    return rand() % limSup + limInf;
+}
+
+void posicionRandom(int *posX, int *posY)
+{
+    while (matrix[*posY][*posX] != 'O')
+    {
+        // inicializar el generador de números aleatorios con una semilla
+        // que cambia con el tiempo
+        srand(time(NULL));
+        int nX = rd(28, 1);
+        int nY = rd(28, 1);
+        if (matrix[nY][nX] == 'O')
+        {
+            *posX = nX;
+            *posY = nY;
+        }
+    }
+}
+
 void pintar(int x, int y)
 {
     for (int i = 0; i < FILAS; i++)
@@ -101,12 +129,9 @@ void pintar(int x, int y)
         printf("\n");
     }
 }
-
-int main(int argc, char const *argv[])
+void game(int *posX, int *posY)
 {
     char op;
-    int posX = 1, posY = 1;
-
     limpiar_pantalla();
     while (1)
     {
@@ -117,42 +142,49 @@ int main(int argc, char const *argv[])
         }
         else
         {
-            pintar(posY, posX);
+            pintar(*posY, *posX);
 
             printf("Press key > ");
             scanf("%c", &op);
             if (op == 'a')
             {
-                if (posX > limiteInf)
+                if (*posX > limiteInf)
                 {
-                    posX--;
+                    *posX--;
                 }
             }
             else if (op == 's')
             {
-                if (posY < liminteSup)
+                if (*posY < liminteSup)
                 {
-                    posY++;
+                    *posY++;
                 }
             }
             else if (op == 'd')
             {
-                if (posX < liminteSup)
+                if (*posX < liminteSup)
                 {
-                    posX++;
+                    *posX++;
                 }
             }
             else if (op == 'w')
             {
-                if (posY > limiteInf)
+                if (*posY > limiteInf)
                 {
-                    posY--;
+                    *posY--;
                 }
             }
             printf("\n");
             limpiar_pantalla();
         }
     }
+}
+
+int main(int argc, char const *argv[])
+{
+    int x = 0, y = 0;
+    posicionRandom(&x, &y);
+    game(&x, &y);
 
     // getMenu();
     return 0;
