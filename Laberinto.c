@@ -4,10 +4,10 @@
 
 #define FILAS 30
 #define COLUMAS 30
-#define limiteInf 1
-#define liminteSup 28
-#define errorMov 0
-#define aceptarMov 1
+#define LIMITE_INF -1
+#define LIMITE_SUP 30
+#define ERROR_MOV 0
+#define ACEPTAR_MOV 1
 
 // var Globales
 char matrix[FILAS][COLUMAS] =
@@ -44,6 +44,7 @@ char matrix[FILAS][COLUMAS] =
 
 // declaracion de la funcion
 void limpiar_pantalla();
+void limpiar_buffer();
 
 void getMenu()
 {
@@ -81,7 +82,7 @@ void getMenu()
     }
 }
 
-int rd(int limSup, int limInf)
+int aleatorio(int limSup, int limInf)
 {
     // srand(time(NULL));
     return rand() % limSup + limInf;
@@ -94,14 +95,38 @@ void posicionRandom(int *posX, int *posY)
         // inicializar el generador de números aleatorios con una semilla
         // que cambia con el tiempo
         srand(time(NULL));
-        int nX = rd(28, 1);
-        int nY = rd(28, 1);
+        int nX = aleatorio(28, 1);
+        int nY = aleatorio(28, 1);
         if (matrix[nY][nX] == 'O')
         {
             *posX = nX;
             *posY = nY;
         }
     }
+}
+
+int validarMovimiento(int posX, int posY, char arr[FILAS][COLUMAS])
+{
+    int temp;
+    if (posX > LIMITE_INF && posX < LIMITE_SUP &&
+        posY > LIMITE_INF && posY < LIMITE_SUP)
+    {
+
+        if (arr[posY][posX] == '#')
+        {
+            temp = ERROR_MOV;
+        }
+        else
+        {
+            temp = ACEPTAR_MOV;
+        }
+    }
+    else
+    {
+        temp = ERROR_MOV;
+    }
+
+    return temp;
 }
 
 void pintar(int x, int y)
@@ -129,13 +154,12 @@ void pintar(int x, int y)
         printf("\n");
     }
 }
-void game(int *posX, int *posY)
+void mover(int *posX, int *posY)
 {
     char op;
     limpiar_pantalla();
     while (1)
     {
-
         if (op == 'q')
         {
             break;
@@ -146,36 +170,43 @@ void game(int *posX, int *posY)
 
             printf("Press key > ");
             scanf("%c", &op);
+            int temp = 0;
             if (op == 'a')
             {
-                if (*posX > limiteInf)
+                temp = (*posX) - 1;
+                if (validarMovimiento(temp, *posY, matrix) == ACEPTAR_MOV)
                 {
-                    *posX--;
+                    (*posX)--;
                 }
             }
             else if (op == 's')
             {
-                if (*posY < liminteSup)
+                temp = (*posY) + 1;
+                if (validarMovimiento(*posX, temp, matrix) == ACEPTAR_MOV)
                 {
-                    *posY++;
+                    (*posY)++;
                 }
             }
             else if (op == 'd')
             {
-                if (*posX < liminteSup)
+                temp = (*posX) + 1;
+                if (validarMovimiento(temp, *posY, matrix) == ACEPTAR_MOV)
                 {
-                    *posX++;
+                    (*posX)++;
                 }
             }
             else if (op == 'w')
             {
-                if (*posY > limiteInf)
+                temp = (*posY) - 1;
+                if (validarMovimiento(*posX, temp, matrix) == ACEPTAR_MOV)
                 {
-                    *posY--;
+                    (*posY)--;
                 }
             }
+            temp = 0;
             printf("\n");
             limpiar_pantalla();
+            limpiar_buffer();
         }
     }
 }
@@ -184,10 +215,18 @@ int main(int argc, char const *argv[])
 {
     int x = 0, y = 0;
     posicionRandom(&x, &y);
-    game(&x, &y);
+    mover(&x, &y);
+
+    // prueba(&x, &y);
 
     // getMenu();
     return 0;
+}
+
+void limpiar_buffer(void)
+{
+    while (getchar() != '\n')
+        ;
 }
 
 // Codigo para limpiar pantalla
