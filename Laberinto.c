@@ -258,18 +258,18 @@ void obtenerMenu(int *posX, int *posY, char matrix[FILAS][COLUMAS])
     struct Personaje reportes[REGISTROS];
     int opcion = 0;
     char input;
-    while (opcion != 4)
+    while (opcion != 3)
     {
         printf("\n\tMENU.\n");
         printf("1. Jugar\n");
-        printf("2. Editor de Laberintos.\n");
-        printf("3. Reportes.\n");
-        printf("4. Salir.\n");
+        printf("2. Reportes.\n");
+        printf("3. Salir.\n");
 
         printf("Selecciona una opcion > ");
         opcion = obtenerNumero(input);
-        if (opcion == 1)
+        switch (opcion)
         {
+        case 1:
             if (numeroDeRegistro == 10)
             {
                 numeroDeRegistro = 0;
@@ -283,23 +283,17 @@ void obtenerMenu(int *posX, int *posY, char matrix[FILAS][COLUMAS])
             posicionRandom(posX, posY, matrix);
             obtenerMovimiento(posX, posY, matrix, &reportes[numeroDeRegistro]);
             numeroDeRegistro++;
-        }
-        else if (opcion == 2)
-        {
-            printf("\nOPCION: EDITOR DE LABERINTOS\n");
-        }
-        else if (opcion == 3)
-        {
+            break;
+        case 2:
             printf("\nOPCION: REPORTES\n");
             verRegistro(reportes);
-        }
-        else if (opcion == 4)
-        {
+            break;
+        case 3:
             printf("\nADIOS\n\n");
-        }
-        else
-        {
+            break;
+        default:
             printf("\nOPCION NO VALIDA!\n");
+            break;
         }
         limpiar_buffer();
     }
@@ -344,10 +338,10 @@ int main(int argc, char const *argv[])
 
     int x, y;
     // obtener poscion aleatoria del bot
-    ubicarBot(matrix);
-    bot.posX = botPosX, bot.posY = botPosY;
-    printf("posicion bot [%d][%d]\n", bot.posX, bot.posY);
-    // obtenerMenu(&x, &y, matrix);
+    // ubicarBot(matrix);
+    // bot.posX = botPosX, bot.posY = botPosY;
+    // printf("posicion bot [%d][%d]\n", bot.posX, bot.posY);
+    obtenerMenu(&x, &y, matrix);
     return 0;
 }
 
