@@ -6,48 +6,28 @@
 #include "constantes.h"
 
 // var Globales
+int turno = 0;
 int numeroDeRegistro = 0;
-char matrix[FILAS][COLUMAS] =
-    {{'#', '#', '#', '#', '#', '#', '#', '#', 'S', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
-     {'#', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'S'},
-     {'#', '#', '#', '#', '#', '#', 'O', 'O', '#', '#', '#', 'O', '#', '#', '#', 'O', '#', 'O', 'O', '#', '#', '#', '#', '#', '#', 'O', 'O', '#', 'O', '#'},
-     {'#', 'O', 'O', 'G', 'O', '#', 'O', '#', 'G', 'G', '#', 'O', '#', 'G', '#', 'O', '#', 'G', '#', 'O', '#', 'O', 'O', 'O', '#', '#', 'O', '#', 'O', '#'},
-     {'#', 'O', '#', '#', 'O', '#', 'O', 'O', 'O', 'O', '#', 'G', '#', 'O', '#', 'O', '#', '#', 'O', 'O', '#', 'O', '#', 'O', 'O', '#', 'O', '#', 'O', '#'},
-     {'#', 'G', '#', 'O', 'O', '#', 'O', '#', '#', '#', '#', '#', '#', 'O', '#', 'O', 'O', 'O', '#', 'O', '#', 'O', '#', '#', '#', '#', 'O', '#', 'O', '#'},
-     {'#', 'O', '#', '#', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', '#', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', 'O', 'O', '#', '#', '#'},
-     {'#', '#', 'O', 'O', 'O', '#', 'O', '#', 'O', '#', 'O', 'O', '#', '#', 'O', '#', '#', 'O', '#', '#', '#', '#', '#', 'O', '#', 'O', '#', '#', 'G', '#'},
-     {'#', 'O', 'O', '#', 'O', '#', 'O', 'O', 'O', '#', 'O', '#', 'O', '#', 'O', 'O', '#', 'O', '#', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', '#', 'G', '#'},
-     {'#', 'O', '#', '#', 'O', '#', '#', '#', 'O', '#', 'O', '#', 'O', '#', '#', 'O', '#', 'O', '#', '#', '#', 'O', '#', '#', '#', '#', 'O', '#', 'O', '#'},
-     {'#', 'O', 'O', 'O', 'O', '#', 'O', '#', 'O', '#', 'O', '#', 'O', '#', 'O', 'O', '#', 'O', 'O', 'O', '#', 'O', 'O', '#', 'O', '#', 'O', '#', 'O', '#'},
-     {'#', '#', '#', 'G', '#', 'O', 'O', 'O', 'O', '#', 'O', '#', 'O', '#', '#', 'O', '#', '#', '#', '#', '#', 'O', '#', 'O', '#', '#', 'O', '#', 'O', '#'},
-     {'#', 'O', 'O', '#', 'O', 'O', '#', '#', '#', 'O', 'O', '#', 'O', '#', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', 'O', '#'},
-     {'#', '#', 'O', '#', '#', 'O', '#', 'O', 'O', '#', 'O', '#', 'O', 'O', 'O', '#', 'O', '#', '#', 'O', '#', 'O', 'O', '#', 'O', '#', 'O', '#', 'O', '#'},
-     {'#', 'O', 'O', '#', 'O', 'O', '#', 'O', '#', '#', 'O', '#', 'O', '#', 'O', '#', '#', 'O', 'O', '#', 'O', 'O', '#', 'O', 'O', '#', 'O', '#', 'O', '#'},
-     {'#', '#', 'O', '#', '#', 'O', 'O', 'O', 'O', '#', 'O', '#', '#', '#', 'O', '#', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', '#', '#', 'O', '#', 'O', '#'},
-     {'#', 'O', 'O', '#', 'O', 'O', '#', 'O', '#', '#', 'O', 'O', '#', 'O', 'O', '#', 'O', '#', '#', '#', '#', '#', 'O', '#', 'O', '#', 'O', '#', 'O', '#'},
-     {'#', '#', 'O', 'O', 'O', '#', '#', '#', 'O', '#', 'O', '#', 'O', '#', 'O', 'O', 'O', '#', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', '#', '#', 'O', '#'},
-     {'S', 'O', '#', 'O', '#', 'O', 'O', 'O', 'O', '#', 'O', 'O', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', 'O', 'O', 'O', 'O', '#'},
-     {'#', 'O', '#', 'O', 'O', 'O', '#', '#', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', '#', '#', 'O', '#', 'O', '#'},
-     {'#', 'O', '#', '#', '#', '#', '#', 'O', 'O', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', 'O', 'O', '#', 'O', '#', '#', '#'},
-     {'#', 'O', '#', 'O', 'O', 'O', '#', 'O', '#', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', '#', 'O', 'O', 'O', 'S'},
-     {'#', 'O', 'O', 'O', '#', 'O', '#', 'O', 'O', '#', 'O', '#', '#', '#', '#', '#', '#', 'O', '#', '#', '#', 'O', 'O', 'O', 'O', '#', 'O', '#', '#', '#'},
-     {'#', '#', '#', '#', '#', 'O', '#', 'O', '#', 'O', 'O', '#', 'O', 'O', 'O', 'O', '#', 'O', 'O', 'O', '#', 'O', '#', '#', '#', '#', 'O', '#', 'O', '#'},
-     {'#', 'O', '#', 'O', 'O', 'O', '#', 'O', 'O', '#', 'O', '#', 'O', '#', '#', '#', '#', '#', '#', 'O', '#', 'O', 'O', 'O', 'O', '#', 'O', 'O', 'O', '#'},
-     {'#', 'O', '#', '#', '#', 'O', '#', '#', '#', '#', 'O', '#', 'O', 'O', 'O', 'O', '#', 'O', '#', 'O', '#', '#', '#', 'O', '#', 'O', '#', '#', 'O', '#'},
-     {'#', 'O', '#', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', '#', 'O', '#', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', 'O', 'O', '#'},
-     {'#', 'O', '#', '#', '#', '#', '#', '#', '#', '#', '#', 'O', '#', 'O', 'O', '#', '#', 'O', '#', 'O', '#', '#', '#', '#', '#', '#', 'O', 'O', 'O', '#'},
-     {'#', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', 'O', 'O', '#', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', '#'},
-     {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', 'S', '#', '#', '#', '#', '#', '#', '#', '#', '#'}};
+int botPosX = 0;
+int botPosY = 0;
 
 // declaracion de la funcion
 void limpiar_pantalla();
 void limpiar_buffer();
+int obtenerTurno();
 
 struct Personaje
 {
     char nombre[15];
     int puntaje;
     char estado[10];
+};
+
+struct Bot
+{
+    int posX;
+    int posY;
+    int movimientos;
 };
 
 // Función para cambiar el nombre de una persona
@@ -87,25 +67,31 @@ void verRegistro(struct Personaje reportes[REGISTROS])
 
 int aleatorio(int limSup, int limInf)
 {
-    // srand(time(NULL));
     return rand() % limSup + limInf;
 }
 
-void posicionRandom(int *posX, int *posY)
+void ubicarBot(char matrix[FILAS][COLUMAS])
 {
-    while (matrix[*posY][*posX] != 'O')
+    // inicializar el generador de números aleatorios con una semilla
+    // que cambia con el tiempo
+    do
     {
-        // inicializar el generador de números aleatorios con una semilla
-        // que cambia con el tiempo
         srand(time(NULL));
-        int nX = aleatorio(28, 1);
-        int nY = aleatorio(28, 1);
-        if (matrix[nY][nX] == 'O')
-        {
-            *posX = nX;
-            *posY = nY;
-        }
-    }
+        botPosX = aleatorio(28, 1);
+        botPosY = aleatorio(28, 1);
+    } while (matrix[botPosY][botPosX] != 'O');
+}
+
+void posicionRandom(int *posX, int *posY, char matrix[FILAS][COLUMAS])
+{
+    // inicializar el generador de números aleatorios con una semilla
+    // que cambia con el tiempo
+    do
+    {
+        srand(time(NULL));
+        *posX = aleatorio(28, 1);
+        *posY = aleatorio(28, 1);
+    } while (matrix[*posY][*posX] != 'O');
 }
 
 int validarMovimiento(int posX, int posY, char arr[FILAS][COLUMAS])
@@ -132,117 +118,54 @@ int validarMovimiento(int posX, int posY, char arr[FILAS][COLUMAS])
     return temp;
 }
 
-void printMatrix(int posX, int posY, char arr[FILAS][COLUMAS])
+void verMapa(int posX, int posY, char arr[FILAS][COLUMAS])
 {
-    int inicioFila = posX - 1;
-    int finFila = posX + 1;
-    int inicioColumna = posY - 1;
-    int finColumna = posY + 1;
-
-    // Verificar límites
-    if (inicioFila < 0)
+    for (int i = 0; i < FILAS; i++)
     {
-        inicioFila = 0;
-    }
-    if (finFila >= FILAS)
-    {
-        finFila = FILAS - 1;
-    }
-    if (inicioColumna < 0)
-    {
-        inicioColumna = 0;
-    }
-    if (finColumna >= COLUMAS)
-    {
-        finColumna = COLUMAS - 1;
-    }
-
-    // Imprimir celdas alrededor de [posX,posY]
-    for (int i = inicioFila; i <= finFila; i++)
-    {
-        for (int j = inicioColumna; j <= finColumna; j++)
+        for (int j = 0; j < COLUMAS; j++)
         {
-            printf("%c ", arr[i][j]);
+            if (i == posY && j == posX)
+            {
+                printf("\033[1;31mA \033[0m");
+            }
+            else if (i == botPosY && j == botPosX)
+            {
+                printf("\033[1;34mB \033[0m");
+            }
+            else
+            {
+
+                if (arr[i][j] == 'O')
+                {
+                    printf("  ");
+                }
+                else if (arr[i][j] == 'G')
+                {
+                    printf("\033[1;33mG \033[0m");
+                }
+                else if (arr[i][j] == 'S')
+                {
+                    printf("\033[1;35mS \033[0m");
+                }
+                else
+                {
+                    printf("\033[1;36m%c \033[0m", arr[i][j]);
+                    // printf("%c ", arr[i][j]);
+                }
+            }
         }
         printf("\n");
     }
 }
 
-void pintar(int x, int y)
-{
-    for (int i = y - 7; i <= y + 7; i++)
-    {
-        if (i >= 0 && i < FILAS)
-        {
-            for (int j = x - 7; j <= x + 7; j++)
-            {
-                if (j >= 0 && j < COLUMAS)
-                {
-                    if (i - 7 != x || j - 7 != y)
-                    {
-                        /* code */
-
-                        if (i == x && j == y)
-                        {
-                            printf("@ ");
-                        }
-                        else
-                        {
-                            if (matrix[i][j] == 'O')
-                            {
-                                printf("  ");
-                            }
-                            else
-                            {
-                                printf("%c ", matrix[i][j]);
-                            }
-                        }
-                    }
-                }
-            }
-            printf("\n");
-        }
-    }
-
-    // for (int i = 0; i < FILAS; i++)
-    // {
-    //     for (int j = 0; j < COLUMAS; j++)
-    //     {
-    //         if (i - 4 > -1 && j - 4 > -1 && i + 4 < COLUMAS && j + 4 < COLUMAS)
-    //         {
-    //             /* code */
-
-    //             if (i == x && j == y)
-    //             {
-    //                 printf("@ ");
-    //             }
-    //             else
-    //             {
-    //                 if (matrix[i][j] == 'O')
-    //                 {
-    //                     printf("  ");
-    //                 }
-    //                 else
-    //                 {
-    //                     printf("%c ", matrix[i][j]);
-    //                 }
-    //             }
-    //         }
-    //         else
-    //         {
-    //             printf(" *");
-    //         }
-    //     }
-    //     printf("\n");
-    // }
-}
 void obtenerMovimiento(int *posX, int *posY, char arr[FILAS][COLUMAS], struct Personaje *personaje)
 {
     char op;
     do
     {
         limpiar_buffer();
-        printMatrix(*posX, *posY, arr);
+        // printMatrix(*posX, *posY, arr);
+        verMapa(*posX, *posY, arr);
         printf("Press key > ");
         scanf("%c", &op);
         int temp = 0;
@@ -281,7 +204,7 @@ void obtenerMovimiento(int *posX, int *posY, char arr[FILAS][COLUMAS], struct Pe
 
         limpiar_pantalla();
 
-        if (op == 'k')
+        if (op == 'f')
         {
             if (arr[*posY][*posX] == 'G')
             {
@@ -291,7 +214,7 @@ void obtenerMovimiento(int *posX, int *posY, char arr[FILAS][COLUMAS], struct Pe
             }
         }
 
-        if (op == 'x')
+        if (op == 'e')
         {
             if (arr[*posY][*posX] == 'S')
             {
@@ -314,15 +237,15 @@ void obtenerMovimiento(int *posX, int *posY, char arr[FILAS][COLUMAS], struct Pe
     } while (1);
 }
 
-int obtenerNumero(char input)
+int obtenerNumero(char entrada)
 {
-    int num;
-    scanf("%c", &input);
+    int numero;
+    scanf("%c", &entrada);
 
-    if (isdigit(input))
-    {                      // Verifica si el caracter ingresado es un dígito
-        num = input - '0'; // Convierte el caracter a su valor numérico
-        return num;
+    if (isdigit(entrada))
+    {                           // Verifica si el caracter ingresado es un dígito
+        numero = entrada - '0'; // Convierte el caracter a su valor numérico
+        return numero;
     }
     else
     {
@@ -330,7 +253,7 @@ int obtenerNumero(char input)
     }
 }
 
-void getMenu(int *posX, int *posY)
+void obtenerMenu(int *posX, int *posY, char matrix[FILAS][COLUMAS])
 {
     struct Personaje reportes[REGISTROS];
     int opcion = 0;
@@ -357,7 +280,7 @@ void getMenu(int *posX, int *posY)
             setNombre(&reportes[numeroDeRegistro], nombre);
             reportes[numeroDeRegistro].puntaje = 0;
             printf("\nOPCION: JUGAR\n");
-            posicionRandom(posX, posY);
+            posicionRandom(posX, posY, matrix);
             obtenerMovimiento(posX, posY, matrix, &reportes[numeroDeRegistro]);
             numeroDeRegistro++;
         }
@@ -384,8 +307,47 @@ void getMenu(int *posX, int *posY)
 
 int main(int argc, char const *argv[])
 {
-    int x = 0, y = 0;
-    getMenu(&x, &y);
+    struct Bot bot;
+    bot.movimientos = 3; // definir cuantos movimientos tendra el bot
+
+    char matrix[FILAS][COLUMAS] =
+        {{'#', '#', '#', '#', '#', '#', '#', '#', 'S', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
+         {'#', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'S'},
+         {'#', '#', '#', '#', '#', '#', 'O', 'O', '#', '#', '#', 'O', '#', '#', '#', 'O', '#', 'O', 'O', '#', '#', '#', '#', '#', '#', 'O', 'O', '#', 'O', '#'},
+         {'#', 'O', 'O', 'G', 'O', '#', 'O', '#', 'G', 'G', '#', 'O', '#', 'G', '#', 'O', '#', 'G', '#', 'O', '#', 'O', 'O', 'O', '#', '#', 'O', '#', 'O', '#'},
+         {'#', 'O', '#', '#', 'O', '#', 'O', 'O', 'O', 'O', '#', 'G', '#', 'O', '#', 'O', '#', '#', 'O', 'O', '#', 'O', '#', 'O', 'O', '#', 'O', '#', 'O', '#'},
+         {'#', 'G', '#', 'O', 'O', '#', 'O', '#', '#', '#', '#', '#', '#', 'O', '#', 'O', 'O', 'O', '#', 'O', '#', 'O', '#', '#', '#', '#', 'O', '#', 'O', '#'},
+         {'#', 'O', '#', '#', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', '#', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', 'O', 'O', '#', '#', '#'},
+         {'#', '#', 'O', 'O', 'O', '#', 'O', '#', 'O', '#', 'O', 'O', '#', '#', 'O', '#', '#', 'O', '#', '#', '#', '#', '#', 'O', '#', 'O', '#', '#', 'G', '#'},
+         {'#', 'O', 'O', '#', 'O', '#', 'O', 'O', 'O', '#', 'O', '#', 'O', '#', 'O', 'O', '#', 'O', '#', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', '#', 'G', '#'},
+         {'#', 'O', '#', '#', 'O', '#', '#', '#', 'O', '#', 'O', '#', 'O', '#', '#', 'O', '#', 'O', '#', '#', '#', 'O', '#', '#', '#', '#', 'O', '#', 'O', '#'},
+         {'#', 'O', 'O', 'O', 'O', '#', 'O', '#', 'O', '#', 'O', '#', 'O', '#', 'O', 'O', '#', 'O', 'O', 'O', '#', 'O', 'O', '#', 'O', '#', 'O', '#', 'O', '#'},
+         {'#', '#', '#', 'G', '#', 'O', 'O', 'O', 'O', '#', 'O', '#', 'O', '#', '#', 'O', '#', '#', '#', '#', '#', 'O', '#', 'O', '#', '#', 'O', '#', 'O', '#'},
+         {'#', 'O', 'O', '#', 'O', 'O', '#', '#', '#', 'O', 'O', '#', 'O', '#', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', 'O', '#'},
+         {'#', '#', 'O', '#', '#', 'O', '#', 'O', 'O', '#', 'O', '#', 'O', 'O', 'O', '#', 'O', '#', '#', 'O', '#', 'O', 'O', '#', 'O', '#', 'O', '#', 'O', '#'},
+         {'#', 'O', 'O', '#', 'O', 'O', '#', 'O', '#', '#', 'O', '#', 'O', '#', 'O', '#', '#', 'O', 'O', '#', 'O', 'O', '#', 'O', 'O', '#', 'O', '#', 'O', '#'},
+         {'#', '#', 'O', '#', '#', 'O', 'O', 'O', 'O', '#', 'O', '#', '#', '#', 'O', '#', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', '#', '#', 'O', '#', 'O', '#'},
+         {'#', 'O', 'O', '#', 'O', 'O', '#', 'O', '#', '#', 'O', 'O', '#', 'O', 'O', '#', 'O', '#', '#', '#', '#', '#', 'O', '#', 'O', '#', 'O', '#', 'O', '#'},
+         {'#', '#', 'O', 'O', 'O', '#', '#', '#', 'O', '#', 'O', '#', 'O', '#', 'O', 'O', 'O', '#', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', '#', '#', 'O', '#'},
+         {'S', 'O', '#', 'O', '#', 'O', 'O', 'O', 'O', '#', 'O', 'O', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', 'O', 'O', 'O', 'O', '#'},
+         {'#', 'O', '#', 'O', 'O', 'O', '#', '#', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', '#', '#', 'O', '#', 'O', '#'},
+         {'#', 'O', '#', '#', '#', '#', '#', 'O', 'O', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', 'O', 'O', '#', 'O', '#', '#', '#'},
+         {'#', 'O', '#', 'O', 'O', 'O', '#', 'O', '#', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', '#', 'O', 'O', 'O', 'S'},
+         {'#', 'O', 'O', 'O', '#', 'O', '#', 'O', 'O', '#', 'O', '#', '#', '#', '#', '#', '#', 'O', '#', '#', '#', 'O', 'O', 'O', 'O', '#', 'O', '#', '#', '#'},
+         {'#', '#', '#', '#', '#', 'O', '#', 'O', '#', 'O', 'O', '#', 'O', 'O', 'O', 'O', '#', 'O', 'O', 'O', '#', 'O', '#', '#', '#', '#', 'O', '#', 'O', '#'},
+         {'#', 'O', '#', 'O', 'O', 'O', '#', 'O', 'O', '#', 'O', '#', 'O', '#', '#', '#', '#', '#', '#', 'O', '#', 'O', 'O', 'O', 'O', '#', 'O', 'O', 'O', '#'},
+         {'#', 'O', '#', '#', '#', 'O', '#', '#', '#', '#', 'O', '#', 'O', 'O', 'O', 'O', '#', 'O', '#', 'O', '#', '#', '#', 'O', '#', 'O', '#', '#', 'O', '#'},
+         {'#', 'O', '#', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', '#', 'O', '#', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', 'O', 'O', '#'},
+         {'#', 'O', '#', '#', '#', '#', '#', '#', '#', '#', '#', 'O', '#', 'O', 'O', '#', '#', 'O', '#', 'O', '#', '#', '#', '#', '#', '#', 'O', 'O', 'O', '#'},
+         {'#', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', 'O', 'O', '#', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', '#', 'O', 'O', '#'},
+         {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', 'S', '#', '#', '#', '#', '#', '#', '#', '#', '#'}};
+
+    int x, y;
+    // obtener poscion aleatoria del bot
+    ubicarBot(matrix);
+    bot.posX = botPosX, bot.posY = botPosY;
+    printf("posicion bot [%d][%d]\n", bot.posX, bot.posY);
+    // obtenerMenu(&x, &y, matrix);
     return 0;
 }
 
@@ -393,6 +355,15 @@ void limpiar_buffer(void)
 {
     while (getchar() != '\n')
         ;
+}
+
+int obtenerTurno()
+{
+    if (turno % 2 == 0)
+    {
+        return TURNO_USUARIO;
+    }
+    return TURNO_BOT;
 }
 
 // Codigo para limpiar pantalla

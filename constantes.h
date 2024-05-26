@@ -8,5 +8,7 @@
 #define ERROR_MOV 0
 #define ACEPTAR_MOV 1
 #define REGISTROS 10
+#define TURNO_USUARIO 1
+#define TURNO_BOT 0
 
 #endif
