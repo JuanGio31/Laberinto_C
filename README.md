@@ -13,16 +13,16 @@
 </h2>
 
 <p align="center">
-  <a href="#Antes-de-usar">Antes de Usar</a> •
-  <a href="#Modo-de-Juego">Modo de Juego</a> •
+  <a href="#antes-de-usar">Antes de Usar</a> •
+  <a href="#modo-de-juego">Modo de Juego</a> •
 </p>
 
-##Antes de usar
+## Antes de usar
     * Abrir una consola/terminal.
     * Dirigirse a la ubicacion del proyecto.
     * escribir el siguiente comando "./build.sh", sin las comillas .
 
-##Modo de Juego
+## Modo de Juego
     * Para moverte puedes pulsar las teclas asdw.
         - a: mover hacia la izquierda.
         - s: mover hacia abajo.
