@@ -20,7 +20,7 @@
 ## Antes de usar
     * Abrir una consola/terminal.
     * Dirigirse a la ubicacion del proyecto.
-    * escribir el siguiente comando "./build.sh", sin las comillas .
+    * Si tienes linux, escribir el siguiente comando "./build.sh", sin las comillas.
 
 ## Modo de Juego
     * Para moverte puedes pulsar las teclas asdw.
